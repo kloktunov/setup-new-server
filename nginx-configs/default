@@ -1,0 +1,19 @@
+# UPDATE USERNAME
+
+server {
+
+    listen 80 default_server;
+
+    server_name _;
+
+    try_files $uri =404;
+
+    location /.well-known/acme-challenge {
+        alias /home/USERNAME/cert/.well-known/acme-challenge;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+}

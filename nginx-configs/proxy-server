@@ -1,0 +1,19 @@
+# UPDATE DOMAIN
+# UPDATE PORT
+
+server {
+
+    listen 443 ssl;
+    server_name DOMAIN;
+
+    ssl_certificate     /etc/letsencrypt/live/DOMAIN/cert.pem;
+    ssl_certificate_key /etc/letsencrypt/live/DOMAIN/privkey.pem;
+
+    location / {
+        proxy_set_header   X-Forwarded-For $remote_addr;
+        proxy_set_header   Host $http_host;
+        proxy_hide_header  X-Powered-By;
+        proxy_pass         http://127.0.0.1:PORT;
+    }
+
+}
