@@ -19,7 +19,7 @@ apt-get install curl -y;
 
 su - $username << EOF
     git clone https://github.com/kloktunov/setup-new-server.git;
-    chomd 777 ./setup-new-server/*.sh;
+    chmod 777 ./setup-new-server/*.sh;
 EOF
 
 # ==================================
