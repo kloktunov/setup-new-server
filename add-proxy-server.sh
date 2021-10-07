@@ -23,3 +23,19 @@ sudo certbot certonly --email support@$domain --webroot -w /home/$username/cert 
 sudo su << EOF
     service nginx restart;
 EOF
+
+mkdir ~/sites;
+mkdir ~/sites/$domain;
+
+echo '#!/bin/sh
+pm2 start npm --name "$domain" -- run start:prod
+pm2 save' > ~/sites/$domain/start.sh;
+
+echo '#!/bin/sh
+pm2 delete $domain;' > ~/sites/$domain/stop.sh;
+
+echo "#!/bin/sh
+./stop.sh;
+./start.sh;" > ~/sites/$domain/restart.sh;
+
+chomod 777 ~/sites/$domain/*.sh;

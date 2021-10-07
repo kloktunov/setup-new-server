@@ -52,6 +52,13 @@ apt-get install nodejs -y;
 npm install -g pm2;
 pm2 startup;
 
+
+echo "# ================================";
+echo "# NODEJS CHECK";
+echo "# ================================";
+node -v;
+echo "# --------------------------------";
+
 # ==================================
 # SETUP CERTBOT
 # ==================================
@@ -64,6 +71,12 @@ echo '0 12 * * * /usr/bin/certbot renew --post-hook "service nginx restart"' >> 
 crontab crontabcache;
 
 rm crontabcache;
+
+echo "# ================================";
+echo "# CRONTAB CHECK";
+echo "# ================================";
+crontab -l;
+echo "# --------------------------------";
 
 # ==================================
 # SETUP POSTGRESQL
@@ -100,3 +113,5 @@ su - postgres << EOF
 EOF
 
 service postgresql restart;
+
+su - $username;
