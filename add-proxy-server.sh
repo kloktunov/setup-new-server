@@ -27,12 +27,12 @@ EOF
 mkdir ~/sites;
 mkdir ~/sites/$domain;
 
-echo '#!/bin/sh
-pm2 start npm --name "$domain" -- run start:prod
-pm2 save' > ~/sites/$domain/start.sh;
+echo "#!/bin/sh
+pm2 start npm --name \"$domain\" -- run start:prod
+pm2 save" > ~/sites/$domain/start.sh;
 
-echo '#!/bin/sh
-pm2 delete $domain;' > ~/sites/$domain/stop.sh;
+echo "#!/bin/sh
+pm2 delete $domain;" > ~/sites/$domain/stop.sh;
 
 echo "#!/bin/sh
 ./stop.sh;
