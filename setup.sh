@@ -23,7 +23,7 @@ apt-get install curl -y;
 # ==================================
 apt-get install nginx -y;
 
-curl https://raw.githubusercontent.com/kloktunov/nginx-configs/master/default > /etc/nginx/sites-available/default;
+curl https://raw.githubusercontent.com/kloktunov/setup-new-server/master/nginx-configs/default > /etc/nginx/sites-available/default;
 
 
 sed -i "s/USERNAME/$username/" /etc/nginx/sites-available/default;
