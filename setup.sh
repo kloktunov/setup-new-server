@@ -17,14 +17,17 @@ apt-get install -y mc;
 apt-get install -y git;
 apt-get install curl -y;
 
+su - $username << EOF
+    git clone https://github.com/kloktunov/setup-new-server.git;
+    chomd 777 ./setup-new-server/*.sh;
+EOF
 
 # ==================================
 # SETUP NGINX
 # ==================================
 apt-get install nginx -y;
 
-curl https://raw.githubusercontent.com/kloktunov/setup-new-server/master/nginx-configs/default > /etc/nginx/sites-available/default;
-
+cp /home/$username/setup-new-server/nginx-configs/default /etc/nginx/sites-available/default;
 
 sed -i "s/USERNAME/$username/" /etc/nginx/sites-available/default;
 sed -i "s/# server_names_hash_bucket_size 64/server_names_hash_bucket_size 256/" /etc/nginx/nginx.conf;
@@ -45,10 +48,22 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -;
 apt-get update;
 
 apt-get install nodejs -y;
-apt-get install certbot -y;
 
 npm install -g pm2;
 pm2 startup;
+
+# ==================================
+# SETUP CERTBOT
+# ==================================
+apt-get install certbot -y;
+
+crontab -l > crontabcache;
+
+echo '0 12 * * * /usr/bin/certbot renew --post-hook "service nginx restart"' >> crontabcache;
+
+crontab crontabcache;
+
+rm crontabcache;
 
 # ==================================
 # SETUP POSTGRESQL
