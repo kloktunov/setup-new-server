@@ -38,4 +38,4 @@ echo "#!/bin/sh
 ./stop.sh;
 ./start.sh;" > ~/sites/$domain/restart.sh;
 
-chomod 777 ~/sites/$domain/*.sh;
+chmod 777 ~/sites/$domain/*.sh;
