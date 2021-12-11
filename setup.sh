@@ -16,6 +16,7 @@ apt-get update;
 apt-get install -y mc;
 apt-get install -y git;
 apt-get install curl -y;
+apt-get install sudo -y;
 
 su - $username << EOF
     git clone https://github.com/kloktunov/setup-new-server.git;
