@@ -31,7 +31,7 @@ apt-get install nginx -y;
 cp /home/$username/setup-new-server/nginx-configs/default /etc/nginx/sites-available/default;
 
 sed -i "s/USERNAME/$username/" /etc/nginx/sites-available/default;
-sed -i "s/# server_names_hash_bucket_size 64/server_names_hash_bucket_size 256/" /etc/nginx/nginx.conf;
+sed -i "s/# server_names_hash_bucket_size 64;/server_names_hash_bucket_size 256;\n\tclient_max_body_size 100M;/" /etc/nginx/nginx.conf;
 
 service nginx restart;
 
