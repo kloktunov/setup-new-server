@@ -115,4 +115,17 @@ EOF
 
 service postgresql restart;
 
-su - $username;
+echo "# ================================";
+echo "# INSTALL GITHUB";
+echo "# ================================";
+
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg;
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null;
+apt update;
+apt install gh -y;
+
+su - $username << EOF
+    gh auth login;
+EOF
+
+su - $username
