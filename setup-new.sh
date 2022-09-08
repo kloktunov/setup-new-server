@@ -24,7 +24,6 @@ apt-get install lsb-release -y;
 
 su - $username << EOF
     git clone https://github.com/kloktunov/setup-new-server.git;
-    chmod 777 ./setup-new-server/*.sh;
 EOF
 
 
