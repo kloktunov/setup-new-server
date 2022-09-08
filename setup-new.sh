@@ -17,6 +17,10 @@ apt-get install -y mc;
 apt-get install -y git;
 apt-get install curl -y;
 apt-get install sudo -y;
+apt-get install ca-certificates -y;
+apt-get install gnupg -y
+apt-get install lsb-release -y;
+
 
 su - $username << EOF
     git clone https://github.com/kloktunov/setup-new-server.git;
@@ -56,7 +60,13 @@ echo "# --------------------------------";
 echo "# ================================";
 echo "# INSTALL DOCKER";
 echo "# ================================";
+mkdir -p /etc/apt/keyrings;
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg;
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null;
 
+echo "# ================================";
+echo "# INSTALL DOCKER COMPOSE";
+echo "# ================================";
 curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose;
 sudo chmod +x /usr/local/bin/docker-compose;
 docker-compose --version;
