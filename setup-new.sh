@@ -59,7 +59,9 @@ echo "# --------------------------------";
 echo "# ================================";
 echo "# INSTALL DOCKER";
 echo "# ================================";
-apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y;
+curl -fsSL https://get.docker.com -o get-docker.sh
+chmod 777 get-docker.sh
+./get-docker.sh
 
 echo "# ================================";
 echo "# INSTALL DOCKER COMPOSE";
