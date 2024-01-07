@@ -87,8 +87,5 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 apt update;
 apt install gh -y;
 
-su - $username << EOF
-    gh auth login;
-EOF
-
+su - $username -c "gh auth login";
 su - $username
