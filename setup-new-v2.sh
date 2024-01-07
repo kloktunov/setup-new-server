@@ -88,4 +88,14 @@ apt update;
 apt install gh -y;
 
 su - $username -c "gh auth login";
+
+
+su - $username << EOF
+    GITHUB_USERNAME=$(gh api user | jq -r '.login')
+    read -p "GitHub personal token: " GITHUB_TOKEN;
+
+    docker login -u $GITHUB_USERNAME -p $GITHUB_TOKEN https://ghcr.io
+EOF
+
 su - $username
+
